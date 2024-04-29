@@ -17,7 +17,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private int userId;
-    public String firstName;
+    private String firstName;
     private String lastName;
     @JsonFormat(pattern = "dd-MM-yyyy")
     private Date birthDate;
