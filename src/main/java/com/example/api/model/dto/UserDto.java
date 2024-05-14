@@ -5,16 +5,17 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.UUID;
 
 @Getter
 @Setter
 public class UserDto {
-    private int userId;
+    private UUID userId;
     private String firstName;
     private String lastName;
     @JsonFormat(pattern = "dd-MM-yyyy")
-    private Date birthDate;
+    private LocalDate birthDate;
     private Address address;
     private String email;
 }

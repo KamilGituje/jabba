@@ -3,17 +3,15 @@ package com.example.api.model.dto;
 import com.example.api.model.Address;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
-import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
-@Setter
 public class UserForUpdateDto {
     private String firstName;
     private String lastName;
     @JsonFormat(pattern = "dd-MM-yyyy")
-    private Date birthDate;
+    private LocalDate birthDate;
     private Address address;
     private String email;
 }
