@@ -20,6 +20,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
 public class UserService {
+
     public UserService(UserRepository userRepository, UserMapper mapper) {
         this.userRepository = userRepository;
         this.mapper = mapper;
@@ -70,16 +71,16 @@ public class UserService {
         userRepository.delete(mapper.userDtoToUser(user));
     }
 
-    public User createUser(UserForCreationDto userForCreationDto) {
+    public UserDto createUser(UserForCreationDto userForCreationDto) {
         var userToAdd = mapper.userForCreationDtoToUser(userForCreationDto);
         userToAdd.getAddress().setUser(userToAdd);
         if (isUserValid(userToAdd)) {
-            return addUser(userToAdd);
+            return mapper.userToUserDto(addUser(userToAdd));
         }
         throw new IllegalArgumentException();
     }
 
-    private boolean isUserValid(User user) {
+    public boolean isUserValid(User user) {
         if (Utility.hasOnlyLetters(user.getFirstName())) {
             if (Utility.hasOnlyLetters(user.getLastName())) {
                 if (user.getBirthDate() != null) {
@@ -94,7 +95,7 @@ public class UserService {
         return false;
     }
 
-    private boolean isAddressValid(Address address) {
+    public boolean isAddressValid(Address address) {
         if (Utility.hasOnlyLetters(address.getCity())) {
             if (Utility.hasOnlyLetters(address.getStreet())) {
                 if (address.getBuilding() > 0) return true;
@@ -103,7 +104,7 @@ public class UserService {
         return false;
     }
 
-    private boolean isFullNamePresent(String firstName, String lastName) {
+    public boolean isFullNamePresent(String firstName, String lastName) {
         if (firstName != null) {
             if (lastName != null) {
                 return true;

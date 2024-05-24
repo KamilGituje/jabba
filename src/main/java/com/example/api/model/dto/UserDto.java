@@ -2,14 +2,16 @@ package com.example.api.model.dto;
 
 import com.example.api.model.Address;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserDto {
     private UUID userId;
     private String firstName;

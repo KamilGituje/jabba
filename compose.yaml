@@ -1,0 +1,25 @@
+services:
+  database:
+    image: 'postgres:latest'
+    container_name: 'postgres'
+    ports:
+      - '5431:5432'
+    environment:
+      - 'POSTGRES_USER=postgres'
+      - 'POSTGRES_DB=jabba'
+      - 'POSTGRES_PASSWORD=siszarp'
+  app:
+    image: 'gradle:jdk21'
+    container_name: 'app'
+    ports:
+      - '8080:8080'
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - 'database'
+    environment:
+      - 'SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/jabba'
+      - 'SPRING_DATASOURCE_USERNAME=postgres'
+      - 'SPRING_DATASOURCE_PASSWORD=siszarp'
+      - 'SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop'
